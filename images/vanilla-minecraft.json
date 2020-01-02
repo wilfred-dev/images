@@ -5,13 +5,14 @@
     "uuid": "default-vanilla-minecraft",
     "name": "Vanilla Minecraft",
     "author": "vilhelm@prytznet.se",
-    "docker_image": "openjdk",
+    "docker_image": "openjdk:8-alpine",
+    "shell": "/bin/ash",
     "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
     "default_image": true,
     "installation": {
         "docker_image": "alpine",
+        "shell": "/bin/ash",
         "script": [
-            "#!/bin/ash",
             "apk add curl --no-cache --update jq",
             "LATEST_VERSION=`curl https://launchermeta.mojang.com/mc/game/version_manifest.json | jq -r '.latest.release'`",
             "MANIFEST_URL=$(curl -sSL https://launchermeta.mojang.com/mc/game/version_manifest.json | jq --arg VERSION $LATEST_VERSION -r '.versions | .[] | select(.id== $VERSION )|.url')",
