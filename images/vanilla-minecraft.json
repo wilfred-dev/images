@@ -1,0 +1,19 @@
+{
+    "meta": {
+        "version": 0
+    },
+    "name": "Vanilla Minecraft",
+    "author": "vilhelm@prytznet.se",
+    "docker_image": "openjdk",
+    "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
+    "installation": {
+        "docker_image": "alpine",
+        "script": [
+            "apk add curl --no-cache --update jq",
+            "LATEST_VERSION=`curl https://launchermeta.mojang.com/mc/game/version_manifest.json | jq -r '.latest.release'`",
+            "MANIFEST_URL=$(curl -sSL https://launchermeta.mojang.com/mc/game/version_manifest.json | jq --arg VERSION $LATEST_VERSION -r '.versions | .[] | select(.id== $VERSION )|.url')",
+            "DOWNLOAD_URL=$(curl ${MANIFEST_URL} | jq .downloads.server | jq -r '. | .url')",
+            "curl -o server.jar $DOWNLOAD_URL"
+        ]
+    }
+}
