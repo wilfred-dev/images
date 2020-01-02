@@ -11,6 +11,7 @@
     "installation": {
         "docker_image": "alpine",
         "script": [
+            "#!/bin/ash",
             "apk add curl --no-cache --update jq",
             "LATEST_VERSION=`curl https://launchermeta.mojang.com/mc/game/version_manifest.json | jq -r '.latest.release'`",
             "MANIFEST_URL=$(curl -sSL https://launchermeta.mojang.com/mc/game/version_manifest.json | jq --arg VERSION $LATEST_VERSION -r '.versions | .[] | select(.id== $VERSION )|.url')",
