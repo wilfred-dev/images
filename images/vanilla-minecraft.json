@@ -6,6 +6,7 @@
     "author": "vilhelm@prytznet.se",
     "docker_image": "openjdk",
     "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
+    "default_image": true,
     "installation": {
         "docker_image": "alpine",
         "script": [
