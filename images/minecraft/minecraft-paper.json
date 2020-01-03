@@ -16,7 +16,8 @@
             "apk add curl --no-cache --update jq",
             "LATEST_VERSION=`curl -s https://papermc.io/api/v1/paper | jq -r '.versions' | jq -r '.[0]'`",
             "LATEST_BUILD=`curl -s https://papermc.io/api/v1/paper/${LATEST_VERSION} | jq -r '.builds.latest'`",
-            "curl -o server.jar https://papermc.io/api/v1/paper/${LATEST_VERSION}/${LATEST_BUILD}/download"
+            "DOWNLOAD_URL=https://papermc.io/api/v1/paper/${LATEST_VERSION}/${LATEST_BUILD}/download",
+            "curl -o server.jar $DOWNLOAD_URL"
         ]
     }
 }
