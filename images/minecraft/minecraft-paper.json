@@ -1,0 +1,22 @@
+{
+    "meta": {
+        "version": 0
+    },
+    "uuid": "minecraft-paper",
+    "name": "Paper Minecraft",
+    "author": "vilhelm@prytznet.se",
+    "docker_image": "openjdk:8-alpine",
+    "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
+    "stop_command": "stop",
+    "default_image": true,
+    "installation": {
+        "docker_image": "alpine",
+        "shell": "/bin/ash",
+        "script": [
+            "apk add curl --no-cache --update jq",
+            "LATEST_VERSION=`curl -s https://papermc.io/api/v1/paper | jq -r '.versions' | jq -r '.[0]'`",
+            "LATEST_BUILD=`curl -s https://papermc.io/api/v1/paper/${LATEST_VERSION} | jq -r '.builds.latest'`",
+            "curl -o server.jar https://papermc.io/api/v1/paper/${LATEST_VERSION}/${LATEST_BUILD}/download"
+        ]
+    }
+}
