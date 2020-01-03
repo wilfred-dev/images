@@ -8,6 +8,7 @@
     "docker_image": "openjdk:8-alpine",
     "shell": "/bin/ash",
     "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
+    "stop_command": "stop",
     "default_image": true,
     "installation": {
         "docker_image": "alpine",
