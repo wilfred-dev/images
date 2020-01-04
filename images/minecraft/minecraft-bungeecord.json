@@ -1,0 +1,21 @@
+{
+    "meta": {
+        "version": 0
+    },
+    "uuid": "minecraft-bungeecord",
+    "name": "Minecraft BungeeCord",
+    "author": "vilhelm@prytznet.se",
+    "docker_image": "openjdk:8-alpine",
+    "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
+    "stop_command": "end",
+    "default_image": true,
+    "installation": {
+        "docker_image": "alpine",
+        "shell": "/bin/ash",
+        "script": [
+            "apk add curl --no-cache --update",
+            "DOWNLOAD_URL=https://ci.md-5.net/job/BungeeCord/lastStableBuild/artifact/bootstrap/target/BungeeCord.jar",
+            "curl -o server.jar $DOWNLOAD_URL"
+        ]
+    }
+}

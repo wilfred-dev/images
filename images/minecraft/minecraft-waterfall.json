@@ -1,0 +1,23 @@
+{
+    "meta": {
+        "version": 0
+    },
+    "uuid": "minecraft-waterfall",
+    "name": "Waterfall Minecraft BungeeCord",
+    "author": "vilhelm@prytznet.se",
+    "docker_image": "openjdk:8-alpine",
+    "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
+    "stop_command": "end",
+    "default_image": true,
+    "installation": {
+        "docker_image": "alpine",
+        "shell": "/bin/ash",
+        "script": [
+            "apk add curl --no-cache --update jq",
+            "LATEST_VERSION=`curl -s https://papermc.io/api/v1/waterfall | jq -r '.versions' | jq -r '.[0]'`",
+            "LATEST_BUILD=`curl -s https://papermc.io/api/v1/waterfall/${LATEST_VERSION} | jq -r '.builds.latest'`",
+            "DOWNLOAD_URL=https://papermc.io/api/v1/waterfall/${LATEST_VERSION}/${LATEST_BUILD}/download",
+            "curl -o server.jar $DOWNLOAD_URL"
+        ]
+    }
+}
