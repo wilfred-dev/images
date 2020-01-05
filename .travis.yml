@@ -10,5 +10,6 @@ deploy:
   script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push wilfreddev/steamcmd:latest
   on:
     branch: master
-  after_deploy:
-  - rm -rf /home/travis/.docker/config.json
+
+after_deploy:
+- rm -rf /home/travis/.docker/config.json
