@@ -17,5 +17,6 @@
             "DOWNLOAD_URL=https://ci.md-5.net/job/BungeeCord/lastStableBuild/artifact/bootstrap/target/BungeeCord.jar",
             "curl -o server.jar $DOWNLOAD_URL"
         ]
-    }
+    },
+    "variables": []
 }

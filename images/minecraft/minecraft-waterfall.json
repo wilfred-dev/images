@@ -19,5 +19,6 @@
             "DOWNLOAD_URL=https://papermc.io/api/v1/waterfall/${LATEST_VERSION}/${LATEST_BUILD}/download",
             "curl -o server.jar $DOWNLOAD_URL"
         ]
-    }
+    },
+    "variables": []
 }

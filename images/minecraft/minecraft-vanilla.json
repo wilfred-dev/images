@@ -14,10 +14,31 @@
         "shell": "/bin/ash",
         "script": [
             "apk add curl --no-cache --update jq",
-            "LATEST_VERSION=`curl https://launchermeta.mojang.com/mc/game/version_manifest.json | jq -r '.latest.release'`",
-            "MANIFEST_URL=$(curl -sSL https://launchermeta.mojang.com/mc/game/version_manifest.json | jq --arg VERSION $LATEST_VERSION -r '.versions | .[] | select(.id== $VERSION )|.url')",
+            "if [ \"$MINECRAFT_VERSION\" == \"latest\" ]; then",
+            "   VERSION=`curl https://launchermeta.mojang.com/mc/game/version_manifest.json | jq -r '.latest.release'`",
+            "else",
+                "VERSION=\"$MINECRAFT_VERSION\"",
+            "fi",
+            "MANIFEST_URL=$(curl -sSL https://launchermeta.mojang.com/mc/game/version_manifest.json | jq --arg VERSION $VERSION -r '.versions | .[] | select(.id== $VERSION )|.url')",
             "DOWNLOAD_URL=$(curl ${MANIFEST_URL} | jq .downloads.server | jq -r '. | .url')",
-            "curl -o server.jar $DOWNLOAD_URL"
+            "curl -o server.jar $DOWNLOAD_URL",
+            "if [ \"$EULA_ACCEPTANCE\" == \"true\" ]; then",
+            "   echo \"eula=true\" > eula.txt",
+            "fi"
         ]
-    }
+    },
+    "variables": [
+        {
+            "prompt": "Which Minecraft version to use during install?",
+            "variable": "MINECRAFT_VERSION",
+            "install_only": true,
+            "default": "latest"
+        },
+        {
+            "prompt": "Do you agree to the Minecraft EULA (https://account.mojang.com/documents/minecraft_eula)?",
+            "variable": "EULA_ACCEPTANCE",
+            "install_only": true,
+            "default": "true"
+        }
+    ]
 }
