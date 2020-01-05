@@ -1,17 +1,14 @@
 services:
   - docker
 
-jobs:
-    include:    
-    - stage: build docker image
-        script:
-        - cd docker-images/steamcmd
-        - docker build -t wilfreddev/steamcmd:latest .
-        deploy:
-        skip_cleanup: true
-        provider: script
-        script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push wilfreddev/steamcmd:latest
-        on:
-            branch: master
-        after_deploy:
-        - rm -rf /home/travis/.docker/config.json
+script:
+- cd docker-images/steamcmd
+- docker build -t wilfreddev/steamcmd:latest .
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push wilfreddev/steamcmd:latest
+  on:
+    branch: master
+  after_deploy:
+  - rm -rf /home/travis/.docker/config.json
