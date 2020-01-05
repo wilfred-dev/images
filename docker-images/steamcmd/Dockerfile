@@ -2,7 +2,7 @@ FROM debian:stable-slim
 
 LABEL maintainer="vilhelm@prytznet.se"
 
-ENV STEAMCMDDIR /server/steamcmd
+ENV STEAMCMDDIR /steamcmd
 ENV HOME /server
 
 RUN set -x \
