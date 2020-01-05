@@ -6,7 +6,7 @@
     "name": "Paper Minecraft",
     "author": "vilhelm@prytznet.se",
     "docker_image": "openjdk:8-alpine",
-    "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
+    "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar server.jar",
     "stop_command": "stop",
     "default_image": true,
     "installation": {
