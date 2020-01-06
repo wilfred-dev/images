@@ -17,7 +17,9 @@
             "LATEST_VERSION=`curl -s https://papermc.io/api/v1/waterfall | jq -r '.versions' | jq -r '.[0]'`",
             "LATEST_BUILD=`curl -s https://papermc.io/api/v1/waterfall/${LATEST_VERSION} | jq -r '.builds.latest'`",
             "DOWNLOAD_URL=https://papermc.io/api/v1/waterfall/${LATEST_VERSION}/${LATEST_BUILD}/download",
-            "curl -o server.jar $DOWNLOAD_URL"
+            "curl -o server.jar $DOWNLOAD_URL",
+            "curl -o config.yml https://raw.githubusercontent.com/wilfred-dev/images/master/configs/minecraft/bungeecord/config.yml",
+            "sed -i \"s/{{SERVER_PORT}}/$SERVER_PORT/g\" config.yml"
         ]
     },
     "variables": []
