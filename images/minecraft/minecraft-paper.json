@@ -2,7 +2,7 @@
     "meta": {
         "version": 0
     },
-    "uuid": "minecraft-paper",
+    "uid": "minecraft-paper",
     "name": "Paper Minecraft",
     "author": "vilhelm@prytznet.se",
     "docker_image": "openjdk:8-alpine",

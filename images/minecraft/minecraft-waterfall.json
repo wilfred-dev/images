@@ -2,7 +2,7 @@
     "meta": {
         "version": 0
     },
-    "uuid": "minecraft-waterfall",
+    "uid": "minecraft-waterfall",
     "name": "Waterfall Minecraft BungeeCord",
     "author": "vilhelm@prytznet.se",
     "docker_image": "openjdk:8-alpine",

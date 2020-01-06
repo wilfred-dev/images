@@ -2,7 +2,7 @@
     "meta": {
         "version": 0
     },
-    "uuid": "minecraft-bungeecord",
+    "uid": "minecraft-bungeecord",
     "name": "Minecraft BungeeCord",
     "author": "vilhelm@prytznet.se",
     "docker_image": "openjdk:8-alpine",

@@ -2,7 +2,7 @@
     "meta": {
         "version": 0
     },
-    "uuid": "minecraft-vanilla",
+    "uid": "minecraft-vanilla",
     "name": "Vanilla Minecraft",
     "author": "vilhelm@prytznet.se",
     "docker_image": "openjdk:8-alpine",
