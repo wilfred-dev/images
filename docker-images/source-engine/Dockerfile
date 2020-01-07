@@ -12,6 +12,7 @@ RUN set -x \
 		ca-certificates \
 	&& apt-get clean autoclean \
 	&& apt-get autoremove -y \
-	&& rm -rf /var/lib/apt/lists/*
+	&& rm -rf /var/lib/apt/lists/* \
+	&& useradd steam
 
 WORKDIR ${HOME}
