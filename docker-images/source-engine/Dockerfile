@@ -13,6 +13,6 @@ RUN set -x \
 	&& apt-get clean autoclean \
 	&& apt-get autoremove -y \
 	&& rm -rf /var/lib/apt/lists/* \
-	&& useradd steam
+	&& useradd -d /server steam
 
 WORKDIR ${HOME}
