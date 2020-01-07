@@ -2,12 +2,12 @@ services:
   - docker
 
 script:
-- cd docker-images/steamcmd
-- docker build -t wilfreddev/steamcmd:latest .
+- cd docker-images/source-engine
+- docker build -t wilfreddev/source-engine:latest .
 deploy:
   skip_cleanup: true
   provider: script
-  script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push wilfreddev/steamcmd:latest
+  script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push wilfreddev/source-engine:latest
   on:
     branch: master
 

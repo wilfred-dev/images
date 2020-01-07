@@ -1,7 +1,7 @@
 # Wilfred Image API Changelog
 
-Changelof for image versions.
+Changelog for image versions.
 
-## version 1
+## Version 1
 
 * Initial version
