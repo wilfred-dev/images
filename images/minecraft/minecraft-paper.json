@@ -7,7 +7,7 @@
     "author": "vilhelm@prytznet.se",
     "docker_image": "wilfreddev/java:latest",
     "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar server.jar",
-    "user": "root",
+    "user": "container",
     "stop_command": "stop",
     "default_image": true,
     "installation": {
