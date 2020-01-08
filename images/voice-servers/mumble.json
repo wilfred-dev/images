@@ -19,6 +19,7 @@
             "curl -sSLO https://github.com/mumble-voip/mumble/releases/download/${MUMBLE_VERSION}/murmur-static_x86-${MUMBLE_VERSION}.tar.bz2",
             "tar -xjvf murmur-static_x86-${MUMBLE_VERSION}.tar.bz2",
             "cp -r murmur-static_x86-${MUMBLE_VERSION}/* /server",
+            "cd /server",
             "curl -o murmur.ini https://raw.githubusercontent.com/wilfred-dev/images/master/configs/voice/murmur.ini",
             "sed -i \"s/{{SERVER_PORT}}/$SERVER_PORT/g\" murmur.ini"
         ]
