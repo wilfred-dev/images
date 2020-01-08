@@ -4,10 +4,14 @@ services:
 script:
 - cd docker-images/source-engine
 - docker build -t wilfreddev/source-engine:latest .
+- cd .. && cd java
+- docker build -t wilfreddev/java:latest .
 deploy:
   skip_cleanup: true
   provider: script
-  script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push wilfreddev/source-engine:latest
+  script:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push wilfreddev/source-engine:latest
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push wilfreddev/java:latest
   on:
     branch: master
 

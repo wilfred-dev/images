@@ -5,7 +5,7 @@
     "uid": "minecraft-waterfall",
     "name": "Waterfall Minecraft BungeeCord",
     "author": "vilhelm@prytznet.se",
-    "docker_image": "openjdk:8-alpine",
+    "docker_image": "wilfreddev/java:latest",
     "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
     "stop_command": "end",
     "default_image": true,
