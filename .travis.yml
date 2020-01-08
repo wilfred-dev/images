@@ -2,10 +2,8 @@ services:
   - docker
 
 script:
-- cd docker-images/source-engine
-- docker build -t wilfreddev/source-engine:latest .
-- cd .. && cd java
-- docker build -t wilfreddev/java:latest .
+- docker build -t wilfreddev/source-engine:latest docker-images/source-engine
+- docker build -t wilfreddev/java:latest docker-images/java
 deploy:
   skip_cleanup: true
   provider: script
