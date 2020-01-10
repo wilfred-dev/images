@@ -29,7 +29,8 @@
             "prompt": "Which Mumble version to download during install?",
             "variable": "MUMBLE_VERSION",
             "install_only": true,
-            "default": "1.3.0"
+            "default": "1.3.0",
+            "hidden": true
         }
     ]
 }

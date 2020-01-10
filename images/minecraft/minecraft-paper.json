@@ -35,13 +35,15 @@
             "prompt": "Which Minecraft version to use during install (has to be supported by Paper)?",
             "variable": "MINECRAFT_VERSION",
             "install_only": true,
-            "default": "latest"
+            "default": "latest",
+            "hidden": false
         },
         {
             "prompt": "Do you agree to the Minecraft EULA (https://account.mojang.com/documents/minecraft_eula)?",
             "variable": "EULA_ACCEPTANCE",
             "install_only": true,
-            "default": "true"
+            "default": "true",
+            "hidden": false
         }
     ]
 }

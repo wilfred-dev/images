@@ -1,0 +1,41 @@
+{
+    "meta": {
+        "api_version": 0
+    },
+    "uid": "minecraft-bedrock",
+    "name": "Minecraft Bedrock",
+    "author": "vilhelm@prytznet.se",
+    "docker_image": "alpine:latest",
+    "command": "./bedrock_server",
+    "user": "root",
+    "stop_command": "stop",
+    "default_image": true,
+    "installation": {
+        "docker_image": "alpine:latest",
+        "shell": "/bin/ash",
+        "script": [
+            "apk add curl unzip --no-cache --update",
+            "DOWNLOAD_URL=https://minecraft.azureedge.net/bin-linux/bedrock-server-${BEDROCK_VERSION}.zip",
+            "cd /tmp",
+            "curl -o server.zip $DOWNLOAD_URL",
+            "unzip server.zip -d /server",
+            "curl -o server.properties https://raw.githubusercontent.com/wilfred-dev/images/master/configs/minecraft/bedrock/server.properties",
+            "sed -i \"s/{{SERVER_PORT}}/$SERVER_PORT/g\" server.properties"
+        ]
+    },
+    "variables": [
+        {
+            "prompt": "Which Minecraft Bedrock version to use during install?",
+            "variable": "BEDROCK_VERSION",
+            "install_only": true,
+            "default": "1.14.1.4",
+            "hidden": false
+        },
+        {
+            "prompt": "",
+            "variable": "LD_LIBRARY_PATH",
+            "default": ".",
+            "hidden": true
+        }
+    ]
+}
