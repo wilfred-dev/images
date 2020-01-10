@@ -34,7 +34,7 @@
         {
             "prompt": "",
             "variable": "LD_LIBRARY_PATH",
-            "install_only": true,
+            "install_only": false,
             "default": ".",
             "hidden": true
         }
