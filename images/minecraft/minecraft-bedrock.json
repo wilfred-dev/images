@@ -7,7 +7,7 @@
     "author": "vilhelm@prytznet.se",
     "docker_image": "wilfreddev/ubuntu:latest",
     "command": "./bedrock_server",
-    "user": "server",
+    "user": "container",
     "stop_command": "stop",
     "default_image": true,
     "installation": {

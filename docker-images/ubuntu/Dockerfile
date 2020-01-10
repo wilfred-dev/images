@@ -4,6 +4,6 @@ LABEL maintainer="vilhelm@prytznet.se"
 
 ENV HOME /server
 
-RUN useradd -d /server steam
+RUN useradd -d /server container
 
 WORKDIR ${HOME}
