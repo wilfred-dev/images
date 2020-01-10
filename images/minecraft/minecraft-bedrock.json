@@ -5,9 +5,9 @@
     "uid": "minecraft-bedrock",
     "name": "Minecraft Bedrock",
     "author": "vilhelm@prytznet.se",
-    "docker_image": "alpine:latest",
+    "docker_image": "wilfreddev/ubuntu:latest",
     "command": "./bedrock_server",
-    "user": "root",
+    "user": "server",
     "stop_command": "stop",
     "default_image": true,
     "installation": {
