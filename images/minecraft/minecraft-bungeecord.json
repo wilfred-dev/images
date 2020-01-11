@@ -1,6 +1,6 @@
 {
     "meta": {
-        "api_version": 0
+        "api_version": 1
     },
     "uid": "minecraft-bungeecord",
     "name": "Minecraft BungeeCord",
