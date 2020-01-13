@@ -1,0 +1,28 @@
+{
+    "meta": {
+        "api_version": 1
+    },
+    "uid": "multi-theft-auto",
+    "name": "Multi Theft Auto",
+    "author": "vilhelm@prytznet.se",
+    "docker_image": "wilfreddev/debian:latest",
+    "command": "./mta-server64",
+    "user": "container",
+    "stop_command": "",
+    "default_image": true,
+    "installation": {
+        "docker_image": "alpine:latest",
+        "shell": "/bin/ash",
+        "script": [
+            "apk add curl tar --no-cache --update",
+            "cd /tmp",
+            "curl -sSLO http://linux.mtasa.com/dl/multitheftauto_linux_x64.tar.gz",
+            "curl -sSLO http://linux.mtasa.com/dl/baseconfig.tar.gz",
+            "tar -xf multitheftauto_linux_x64.tar.gz",
+            "tar -xf baseconfig.tar.gz",
+            "mv multitheftauto_linux_x64/* /server",
+            "mv baseconfig/* /server/mods/deathmatch"
+        ]
+    },
+    "variables": []
+}
