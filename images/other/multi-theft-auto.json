@@ -11,17 +11,19 @@
     "stop_command": "",
     "default_image": true,
     "installation": {
-        "docker_image": "alpine:latest",
-        "shell": "/bin/ash",
+        "docker_image": "wilfreddev/debian:latest",
+        "shell": "/bin/bash",
         "script": [
-            "apk add curl tar --no-cache --update",
+            "apt update -y",
+            "apt install curl -y",
             "cd /tmp",
             "curl -sSLO http://linux.mtasa.com/dl/multitheftauto_linux_x64.tar.gz",
             "curl -sSLO http://linux.mtasa.com/dl/baseconfig.tar.gz",
             "tar -xf multitheftauto_linux_x64.tar.gz",
             "tar -xf baseconfig.tar.gz",
             "mv multitheftauto_linux_x64/* /server",
-            "mv baseconfig/* /server/mods/deathmatch"
+            "mv baseconfig/* /server/mods/deathmatch",
+            "chown -R container:container /server"
         ]
     },
     "variables": []
