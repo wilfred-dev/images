@@ -14,7 +14,17 @@
         "files": [
             {
                 "filename": "server.properties",
-                "parser": "properties"
+                "parser": "properties",
+                "environment": [
+                    {
+                        "config": "server-port",
+                        "value": "SERVER_PORT"
+                    }
+                ],
+                "pretty": {
+                    "max_players": "Max Players",
+                    "white-list": "Whitelist"
+                }
             }
         ]
     },
