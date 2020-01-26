@@ -1,6 +1,6 @@
 {
     "meta": {
-        "api_version": 1
+        "api_version": 2
     },
     "uid": "multi-theft-auto",
     "name": "Multi Theft Auto",
@@ -10,6 +10,9 @@
     "user": "container",
     "stop_command": "",
     "default_image": true,
+    "config": {
+        "files": []
+    },
     "installation": {
         "docker_image": "wilfreddev/debian:latest",
         "shell": "/bin/bash",

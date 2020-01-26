@@ -1,6 +1,6 @@
 {
     "meta": {
-        "api_version": 1
+        "api_version": 2
     },
     "uid": "minecraft-waterfall",
     "name": "Waterfall Minecraft BungeeCord",
@@ -10,6 +10,14 @@
     "user": "container",
     "stop_command": "end",
     "default_image": true,
+    "config": {
+        "files": [
+            {
+                "filename": "server.properties",
+                "parser": "properties"
+            }
+        ]
+    },
     "installation": {
         "docker_image": "alpine:latest",
         "shell": "/bin/ash",
