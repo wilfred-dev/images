@@ -16,7 +16,8 @@
                 "filename": "murmur.ini",
                 "parser": "ini",
                 "environment": [],
-                "pretty": {}
+                "pretty": {},
+                "action": {}
             }
         ]
     },

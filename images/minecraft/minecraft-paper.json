@@ -24,6 +24,10 @@
                 "pretty": {
                     "max_players": "Max Players",
                     "white-list": "Whitelist"
+                },
+                "action": {
+                    "difficulty": "difficulty {}",
+                    "white-list": "whitelist {}"
                 }
             }
         ]

@@ -24,7 +24,8 @@
                 "pretty": {
                     "max_players": "Max Players",
                     "white-list": "Whitelist"
-                }
+                },
+                "action": {}
             }
         ]
     },
