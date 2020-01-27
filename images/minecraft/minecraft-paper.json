@@ -17,8 +17,8 @@
                 "parser": "properties",
                 "environment": [
                     {
-                        "config": "server-port",
-                        "value": "SERVER_PORT"
+                        "config_variable": "server-port",
+                        "environment_variable": "SERVER_PORT"
                     }
                 ],
                 "action": {
