@@ -13,11 +13,15 @@
     "config": {
         "files": [
             {
-                "filename": "server.properties",
-                "parser": "properties",
+                "filename": "config.yml",
+                "parser": "yaml",
                 "environment": [
                     {
-                        "config_variable": "server-port",
+                        "config_variable": "listeners:host",
+                        "environment_variable": "SERVER_PORT"
+                    },
+                    {
+                        "config_variable": "listeners:query_port",
                         "environment_variable": "SERVER_PORT"
                     }
                 ],
