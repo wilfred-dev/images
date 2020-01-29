@@ -18,7 +18,8 @@
                 "environment": [
                     {
                         "config_variable": "server-port",
-                        "environment_variable": "SERVER_PORT"
+                        "environment_variable": "SERVER_PORT",
+                        "value_format": "{}"
                     }
                 ],
                 "action": {

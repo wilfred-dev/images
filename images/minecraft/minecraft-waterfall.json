@@ -18,11 +18,13 @@
                 "environment": [
                     {
                         "config_variable": "/listeners/host",
-                        "environment_variable": "SERVER_PORT"
+                        "environment_variable": "SERVER_PORT",
+                        "value_format": "0.0.0.0:{}"
                     },
                     {
                         "config_variable": "/listeners/query_port",
-                        "environment_variable": "SERVER_PORT"
+                        "environment_variable": "SERVER_PORT",
+                        "value_format": "0.0.0.0:{}"
                     }
                 ],
                 "action": {}
