@@ -7,18 +7,11 @@
     "author": "vilhelm@prytznet.se",
     "docker_image": "wilfreddev/alpine:latest",
     "command": "./murmur.x86 -fg",
-    "user": "",
+    "user": "container",
     "stop_command": "",
     "default_image": true,
     "config": {
-        "files": [
-            {
-                "filename": "murmur.ini",
-                "parser": "ini",
-                "environment": [],
-                "action": {}
-            }
-        ]
+        "files": []
     },
     "installation": {
         "docker_image": "wilfreddev/alpine:latest",
@@ -29,7 +22,8 @@
             "curl -sSLO https://github.com/mumble-voip/mumble/releases/download/${MUMBLE_VERSION}/murmur-static_x86-${MUMBLE_VERSION}.tar.bz2",
             "tar -xjvf murmur-static_x86-${MUMBLE_VERSION}.tar.bz2",
             "cp -r murmur-static_x86-${MUMBLE_VERSION}/* /server",
-            "cd /server"
+            "cd /server",
+            "chown -R server:server /server"
         ]
     },
     "variables": [
