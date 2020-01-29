@@ -19,7 +19,7 @@
                     {
                         "config_variable": "server-port",
                         "environment_variable": "SERVER_PORT",
-                        "value_format": "{}"
+                        "value_format": null
                     }
                 ],
                 "action": {}
