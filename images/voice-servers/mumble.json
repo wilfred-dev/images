@@ -5,7 +5,7 @@
     "uid": "voice-mumble",
     "name": "Voice Mumble",
     "author": "vilhelm@prytznet.se",
-    "docker_image": "alpine:latest",
+    "docker_image": "wilfreddev/alpine:latest",
     "command": "./murmur.x86 -fg",
     "user": "",
     "stop_command": "",
@@ -21,7 +21,7 @@
         ]
     },
     "installation": {
-        "docker_image": "alpine:latest",
+        "docker_image": "wilfreddev/alpine:latest",
         "shell": "/bin/ash",
         "script": [
             "apk add curl tar --no-cache --update",
