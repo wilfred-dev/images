@@ -5,6 +5,6 @@ LABEL maintainer="vilhelm@prytznet.se"
 ENV HOME /server
 
 RUN set -x \
-	&& useradd -d /server container
+	&& adduser -D -h /server container
 
 WORKDIR ${HOME}
