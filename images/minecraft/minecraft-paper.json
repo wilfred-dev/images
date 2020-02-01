@@ -30,7 +30,7 @@
         ]
     },
     "installation": {
-        "docker_image": "alpine:latest",
+        "docker_image": "wilfreddev/alpine:latest",
         "shell": "/bin/ash",
         "script": [
             "apk add curl --no-cache --update jq",
@@ -44,7 +44,10 @@
             "curl -o server.jar $DOWNLOAD_URL",
             "if [ \"$EULA_ACCEPTANCE\" == \"true\" ]; then",
             "   echo \"eula=true\" > eula.txt",
-            "fi"
+            "fi",
+            "curl -o server.properties https://raw.githubusercontent.com/wilfred-dev/images/master/configs/minecraft/standard/server.properties",
+            "sed -i \"s/{{SERVER_PORT}}/$SERVER_PORT/g\" server.properties",
+            "chown -R container:container /server"
         ]
     },
     "variables": [

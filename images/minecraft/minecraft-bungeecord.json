@@ -32,14 +32,15 @@
         ]
     },
     "installation": {
-        "docker_image": "alpine:latest",
+        "docker_image": "wilfreddev/alpine:latest",
         "shell": "/bin/ash",
         "script": [
             "apk add curl --no-cache --update",
             "DOWNLOAD_URL=https://ci.md-5.net/job/BungeeCord/lastStableBuild/artifact/bootstrap/target/BungeeCord.jar",
             "curl -o server.jar $DOWNLOAD_URL",
             "curl -o config.yml https://raw.githubusercontent.com/wilfred-dev/images/master/configs/minecraft/bungeecord/config.yml",
-            "sed -i \"s/{{SERVER_PORT}}/$SERVER_PORT/g\" config.yml"
+            "sed -i \"s/{{SERVER_PORT}}/$SERVER_PORT/g\" config.yml",
+            "chown -R container:container /server"
         ]
     },
     "variables": []

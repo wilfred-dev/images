@@ -27,7 +27,7 @@
         ]
     },
     "installation": {
-        "docker_image": "alpine:latest",
+        "docker_image": "wilfreddev/alpine:latest",
         "shell": "/bin/ash",
         "script": [
             "apk add curl unzip --no-cache --update",
@@ -35,8 +35,7 @@
             "cd /tmp",
             "curl -o server.zip $DOWNLOAD_URL",
             "unzip server.zip -d /server",
-            "curl -o server.properties https://raw.githubusercontent.com/wilfred-dev/images/master/configs/minecraft/bedrock/server.properties",
-            "sed -i \"s/{{SERVER_PORT}}/$SERVER_PORT/g\" server.properties"
+            "chown -R container:container /server"
         ]
     },
     "variables": [

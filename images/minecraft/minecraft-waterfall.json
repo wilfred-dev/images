@@ -32,7 +32,7 @@
         ]
     },
     "installation": {
-        "docker_image": "alpine:latest",
+        "docker_image": "wilfreddev/alpine:latest",
         "shell": "/bin/ash",
         "script": [
             "apk add curl --no-cache --update jq",
@@ -41,7 +41,8 @@
             "DOWNLOAD_URL=https://papermc.io/api/v1/waterfall/${LATEST_VERSION}/${LATEST_BUILD}/download",
             "curl -o server.jar $DOWNLOAD_URL",
             "curl -o config.yml https://raw.githubusercontent.com/wilfred-dev/images/master/configs/minecraft/bungeecord/config.yml",
-            "sed -i \"s/{{SERVER_PORT}}/$SERVER_PORT/g\" config.yml"
+            "sed -i \"s/{{SERVER_PORT}}/$SERVER_PORT/g\" config.yml",
+            "chown -R container:container /server"
         ]
     },
     "variables": []
