@@ -14,7 +14,7 @@
         "files": []
     },
     "installation": {
-        "docker_image": "wilfreddev/alpine:latest",
+        "docker_image": "alpine:latest",
         "shell": "/bin/ash",
         "script": [
             "apk add curl tar --no-cache --update",
@@ -23,7 +23,6 @@
             "tar -xjvf murmur-static_x86-${MUMBLE_VERSION}.tar.bz2",
             "cp -r murmur-static_x86-${MUMBLE_VERSION}/* /server",
             "cd /server",
-            "chown -R server:server /server"
         ]
     },
     "variables": [
