@@ -17,12 +17,12 @@
                 "parser": "yaml",
                 "environment": [
                     {
-                        "config_variable": "/listeners/host",
+                        "config_variable": "listeners/0/host",
                         "environment_variable": "SERVER_PORT",
                         "value_format": "0.0.0.0:{}"
                     },
                     {
-                        "config_variable": "/listeners/query_port",
+                        "config_variable": "listeners/0/query_port",
                         "environment_variable": "SERVER_PORT",
                         "value_format": null
                     }
