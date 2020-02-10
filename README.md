@@ -10,4 +10,4 @@ See [CHANGELOG.md](CHANGELOG.md) for changes in the configuration (API changes).
 
 ## Documentation
 
-For more information about Wilfred images, please refer to the [official documentation](https://wilfred.readthedocs.io/en/latest/images/).
+For more information about Wilfred images, please refer to the [official documentation](https://docs.wilfredproject.org/en/latest/images/).
