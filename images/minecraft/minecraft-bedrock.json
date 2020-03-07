@@ -30,7 +30,7 @@
         "docker_image": "wilfreddev/alpine:latest",
         "shell": "/bin/ash",
         "script": [
-            "apk add curl unzip --no-cache --update",
+            "apk --no-cache --update add curl jq",
             "DOWNLOAD_URL=https://minecraft.azureedge.net/bin-linux/bedrock-server-${BEDROCK_VERSION}.zip",
             "cd /tmp",
             "curl -o server.zip $DOWNLOAD_URL",
@@ -43,7 +43,7 @@
             "prompt": "Which Minecraft Bedrock version to use during install?",
             "variable": "BEDROCK_VERSION",
             "install_only": true,
-            "default": "1.14.1.4",
+            "default": "1.14.32.1",
             "hidden": false
         },
         {

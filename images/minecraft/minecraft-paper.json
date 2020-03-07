@@ -33,7 +33,7 @@
         "docker_image": "wilfreddev/alpine:latest",
         "shell": "/bin/ash",
         "script": [
-            "apk add curl --no-cache --update jq",
+            "apk --no-cache --update add curl jq",
             "if [ \"$MINECRAFT_VERSION\" == \"latest\" ]; then",
             "   VERSION=`curl -s https://papermc.io/api/v1/paper | jq -r '.versions' | jq -r '.[0]'`",
             "else",
