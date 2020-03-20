@@ -37,7 +37,7 @@
             "if [ \"$MINECRAFT_VERSION\" == \"latest\" ]; then",
             "   VERSION=`curl https://launchermeta.mojang.com/mc/game/version_manifest.json | jq -r '.latest.release'`",
             "else",
-                "VERSION=\"$MINECRAFT_VERSION\"",
+            "   VERSION=\"$MINECRAFT_VERSION\"",
             "fi",
             "MANIFEST_URL=$(curl -sSL https://launchermeta.mojang.com/mc/game/version_manifest.json | jq --arg VERSION $VERSION -r '.versions | .[] | select(.id== $VERSION )|.url')",
             "DOWNLOAD_URL=$(curl ${MANIFEST_URL} | jq .downloads.server | jq -r '. | .url')",

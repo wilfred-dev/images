@@ -37,7 +37,7 @@
             "if [ \"$MINECRAFT_VERSION\" == \"latest\" ]; then",
             "   VERSION=`curl -s https://papermc.io/api/v1/paper | jq -r '.versions' | jq -r '.[0]'`",
             "else",
-                "VERSION=\"$MINECRAFT_VERSION\"",
+            "   VERSION=\"$MINECRAFT_VERSION\"",
             "fi",
             "LATEST_BUILD=`curl -s https://papermc.io/api/v1/paper/${VERSION} | jq -r '.builds.latest'`",
             "DOWNLOAD_URL=https://papermc.io/api/v1/paper/${VERSION}/${LATEST_BUILD}/download",
