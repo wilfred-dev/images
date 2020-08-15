@@ -43,7 +43,7 @@
             "prompt": "Which Minecraft Bedrock version to use during install?",
             "variable": "BEDROCK_VERSION",
             "install_only": true,
-            "default": "1.16.1.02",
+            "default": "1.16.20.03",
             "hidden": false
         },
         {
