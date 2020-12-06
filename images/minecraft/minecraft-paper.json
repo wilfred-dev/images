@@ -1,69 +1,69 @@
 {
-    "meta": {
-        "api_version": 2
-    },
-    "uid": "minecraft-paper",
-    "name": "Paper Minecraft",
-    "author": "vilhelm@prytznet.se",
-    "docker_image": "wilfreddev/java:latest",
-    "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar server.jar",
-    "user": "container",
-    "stop_command": "stop",
-    "default_image": true,
-    "config": {
-        "files": [
-            {
-                "filename": "server.properties",
-                "parser": "properties",
-                "environment": [
-                    {
-                        "config_variable": "server-port",
-                        "environment_variable": "SERVER_PORT",
-                        "value_format": null
-                    }
-                ],
-                "action": {
-                    "difficulty": "difficulty {}",
-                    "white-list": "whitelist {}"
-                }
-            }
-        ]
-    },
-    "installation": {
-        "docker_image": "wilfreddev/alpine:latest",
-        "shell": "/bin/ash",
-        "script": [
-            "apk --no-cache --update add curl jq",
-            "if [ \"$MINECRAFT_VERSION\" == \"latest\" ]; then",
-            "   VERSION=`curl -s https://papermc.io/api/v1/paper | jq -r '.versions' | jq -r '.[0]'`",
-            "else",
-            "   VERSION=\"$MINECRAFT_VERSION\"",
-            "fi",
-            "LATEST_BUILD=`curl -s https://papermc.io/api/v1/paper/${VERSION} | jq -r '.builds.latest'`",
-            "DOWNLOAD_URL=https://papermc.io/api/v1/paper/${VERSION}/${LATEST_BUILD}/download",
-            "curl -o server.jar $DOWNLOAD_URL",
-            "if [ \"$EULA_ACCEPTANCE\" == \"true\" ]; then",
-            "   echo \"eula=true\" > eula.txt",
-            "fi",
-            "curl -o server.properties https://raw.githubusercontent.com/wilfred-dev/images/master/configs/minecraft/standard/server.properties",
-            "sed -i \"s/{{SERVER_PORT}}/$SERVER_PORT/g\" server.properties",
-            "chown -R container:container /server"
-        ]
-    },
-    "variables": [
-        {
-            "prompt": "Which Minecraft version to use during install (has to be supported by Paper)?",
-            "variable": "MINECRAFT_VERSION",
-            "install_only": true,
-            "default": "latest",
-            "hidden": false
-        },
-        {
-            "prompt": "Do you agree to the Minecraft EULA (https://account.mojang.com/documents/minecraft_eula)?",
-            "variable": "EULA_ACCEPTANCE",
-            "install_only": true,
-            "default": "true",
-            "hidden": false
+  "meta": {
+    "api_version": 2
+  },
+  "uid": "minecraft-paper",
+  "name": "Paper Minecraft",
+  "author": "vilhelm@prytznet.se",
+  "docker_image": "wilfreddev/java:latest",
+  "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar server.jar",
+  "user": "container",
+  "stop_command": "stop",
+  "default_image": true,
+  "config": {
+    "files": [
+      {
+        "filename": "server.properties",
+        "parser": "properties",
+        "environment": [
+          {
+            "config_variable": "server-port",
+            "environment_variable": "SERVER_PORT",
+            "value_format": null
+          }
+        ],
+        "action": {
+          "difficulty": "difficulty {}",
+          "white-list": "whitelist {}"
         }
+      }
     ]
+  },
+  "installation": {
+    "docker_image": "wilfreddev/alpine:latest",
+    "shell": "/bin/ash",
+    "script": [
+      "apk --no-cache --update add curl jq",
+      "if [ \"$MINECRAFT_VERSION\" == \"latest\" ]; then",
+      "   VERSION=`curl -s https://papermc.io/api/v1/paper | jq -r '.versions' | jq -r '.[0]'`",
+      "else",
+      "   VERSION=\"$MINECRAFT_VERSION\"",
+      "fi",
+      "LATEST_BUILD=`curl -s https://papermc.io/api/v1/paper/${VERSION} | jq -r '.builds.latest'`",
+      "DOWNLOAD_URL=https://papermc.io/api/v1/paper/${VERSION}/${LATEST_BUILD}/download",
+      "curl -o server.jar $DOWNLOAD_URL",
+      "if [ \"$EULA_ACCEPTANCE\" == \"true\" ]; then",
+      "   echo \"eula=true\" > eula.txt",
+      "fi",
+      "curl -o server.properties https://raw.githubusercontent.com/wilfred-dev/images/master/configs/minecraft/standard/server.properties",
+      "sed -i \"s/{{SERVER_PORT}}/$SERVER_PORT/g\" server.properties",
+      "chown -R container:container /server"
+    ]
+  },
+  "variables": [
+    {
+      "prompt": "Which Minecraft version to use during install (has to be supported by Paper)?",
+      "variable": "MINECRAFT_VERSION",
+      "install_only": true,
+      "default": "latest",
+      "hidden": false
+    },
+    {
+      "prompt": "Do you agree to the Minecraft EULA (https://account.mojang.com/documents/minecraft_eula)?",
+      "variable": "EULA_ACCEPTANCE",
+      "install_only": true,
+      "default": "true",
+      "hidden": false
+    }
+  ]
 }

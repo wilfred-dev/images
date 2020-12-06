@@ -1,49 +1,49 @@
 {
-    "meta": {
-        "api_version": 2
-    },
-    "uid": "minecraft-waterfall",
-    "name": "Waterfall Minecraft BungeeCord",
-    "author": "vilhelm@prytznet.se",
-    "docker_image": "wilfreddev/java:latest",
-    "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
-    "user": "container",
-    "stop_command": "end",
-    "default_image": true,
-    "config": {
-        "files": [
-            {
-                "filename": "config.yml",
-                "parser": "yaml",
-                "environment": [
-                    {
-                        "config_variable": "listeners/0/host",
-                        "environment_variable": "SERVER_PORT",
-                        "value_format": "0.0.0.0:{}"
-                    },
-                    {
-                        "config_variable": "listeners/0/query_port",
-                        "environment_variable": "SERVER_PORT",
-                        "value_format": null
-                    }
-                ],
-                "action": {}
-            }
-        ]
-    },
-    "installation": {
-        "docker_image": "wilfreddev/alpine:latest",
-        "shell": "/bin/ash",
-        "script": [
-            "apk --no-cache --update add curl jq",
-            "LATEST_VERSION=`curl -s https://papermc.io/api/v1/waterfall | jq -r '.versions' | jq -r '.[0]'`",
-            "LATEST_BUILD=`curl -s https://papermc.io/api/v1/waterfall/${LATEST_VERSION} | jq -r '.builds.latest'`",
-            "DOWNLOAD_URL=https://papermc.io/api/v1/waterfall/${LATEST_VERSION}/${LATEST_BUILD}/download",
-            "curl -o server.jar $DOWNLOAD_URL",
-            "curl -o config.yml https://raw.githubusercontent.com/wilfred-dev/images/master/configs/minecraft/bungeecord/config.yml",
-            "sed -i \"s/{{SERVER_PORT}}/$SERVER_PORT/g\" config.yml",
-            "chown -R container:container /server"
-        ]
-    },
-    "variables": []
+  "meta": {
+    "api_version": 2
+  },
+  "uid": "minecraft-waterfall",
+  "name": "Waterfall Minecraft BungeeCord",
+  "author": "vilhelm@prytznet.se",
+  "docker_image": "wilfreddev/java:latest",
+  "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
+  "user": "container",
+  "stop_command": "end",
+  "default_image": true,
+  "config": {
+    "files": [
+      {
+        "filename": "config.yml",
+        "parser": "yaml",
+        "environment": [
+          {
+            "config_variable": "listeners/0/host",
+            "environment_variable": "SERVER_PORT",
+            "value_format": "0.0.0.0:{}"
+          },
+          {
+            "config_variable": "listeners/0/query_port",
+            "environment_variable": "SERVER_PORT",
+            "value_format": null
+          }
+        ],
+        "action": {}
+      }
+    ]
+  },
+  "installation": {
+    "docker_image": "wilfreddev/alpine:latest",
+    "shell": "/bin/ash",
+    "script": [
+      "apk --no-cache --update add curl jq",
+      "LATEST_VERSION=`curl -s https://papermc.io/api/v1/waterfall | jq -r '.versions' | jq -r '.[0]'`",
+      "LATEST_BUILD=`curl -s https://papermc.io/api/v1/waterfall/${LATEST_VERSION} | jq -r '.builds.latest'`",
+      "DOWNLOAD_URL=https://papermc.io/api/v1/waterfall/${LATEST_VERSION}/${LATEST_BUILD}/download",
+      "curl -o server.jar $DOWNLOAD_URL",
+      "curl -o config.yml https://raw.githubusercontent.com/wilfred-dev/images/master/configs/minecraft/bungeecord/config.yml",
+      "sed -i \"s/{{SERVER_PORT}}/$SERVER_PORT/g\" config.yml",
+      "chown -R container:container /server"
+    ]
+  },
+  "variables": []
 }

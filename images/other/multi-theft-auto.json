@@ -1,33 +1,33 @@
 {
-    "meta": {
-        "api_version": 2
-    },
-    "uid": "multi-theft-auto",
-    "name": "Multi Theft Auto",
-    "author": "vilhelm@prytznet.se",
+  "meta": {
+    "api_version": 2
+  },
+  "uid": "multi-theft-auto",
+  "name": "Multi Theft Auto",
+  "author": "vilhelm@prytznet.se",
+  "docker_image": "wilfreddev/debian:latest",
+  "command": "./mta-server64",
+  "user": "container",
+  "stop_command": "",
+  "default_image": true,
+  "config": {
+    "files": []
+  },
+  "installation": {
     "docker_image": "wilfreddev/debian:latest",
-    "command": "./mta-server64",
-    "user": "container",
-    "stop_command": "",
-    "default_image": true,
-    "config": {
-        "files": []
-    },
-    "installation": {
-        "docker_image": "wilfreddev/debian:latest",
-        "shell": "/bin/bash",
-        "script": [
-            "apt update -y",
-            "apt install curl -y",
-            "cd /tmp",
-            "curl -sSLO http://linux.mtasa.com/dl/multitheftauto_linux_x64.tar.gz",
-            "curl -sSLO http://linux.mtasa.com/dl/baseconfig.tar.gz",
-            "tar -xf multitheftauto_linux_x64.tar.gz",
-            "tar -xf baseconfig.tar.gz",
-            "mv multitheftauto_linux_x64/* /server",
-            "mv baseconfig/* /server/mods/deathmatch",
-            "chown -R container:container /server"
-        ]
-    },
-    "variables": []
+    "shell": "/bin/bash",
+    "script": [
+      "apt update -y",
+      "apt install curl -y",
+      "cd /tmp",
+      "curl -sSLO http://linux.mtasa.com/dl/multitheftauto_linux_x64.tar.gz",
+      "curl -sSLO http://linux.mtasa.com/dl/baseconfig.tar.gz",
+      "tar -xf multitheftauto_linux_x64.tar.gz",
+      "tar -xf baseconfig.tar.gz",
+      "mv multitheftauto_linux_x64/* /server",
+      "mv baseconfig/* /server/mods/deathmatch",
+      "chown -R container:container /server"
+    ]
+  },
+  "variables": []
 }

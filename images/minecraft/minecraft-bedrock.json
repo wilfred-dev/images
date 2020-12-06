@@ -1,62 +1,62 @@
 {
-    "meta": {
-        "api_version": 2
-    },
-    "uid": "minecraft-bedrock",
-    "name": "Minecraft Bedrock",
-    "author": "vilhelm@prytznet.se",
-    "docker_image": "wilfreddev/ubuntu:latest",
-    "command": "./bedrock_server",
-    "user": "container",
-    "stop_command": "stop",
-    "default_image": true,
-    "config": {
-        "files": [
-            {
-                "filename": "server.properties",
-                "parser": "properties",
-                "environment": [
-                    {
-                        "config_variable": "server-port",
-                        "environment_variable": "SERVER_PORT",
-                        "value_format": null
-                    }
-                ],
-                "action": {}
-            }
-        ]
-    },
-    "installation": {
-        "docker_image": "wilfreddev/alpine:latest",
-        "shell": "/bin/ash",
-        "script": [
-            "apk --no-cache --update add curl jq",
-            "if [ \"$BEDROCK_VERSION\" == \"latest\" ]; then",
-            "   RAW=`curl https://www.minecraft.net/en-us/download/server/bedrock`",
-            "   DOWNLOAD_URL=`echo \"$RAW\" | grep -Eo \"(http|https)://[a-zA-Z0-9./?=_%:-]*\" | grep -E 'https://minecraft.azureedge.net/bin-linux'`",
-            "else",
-            "   DOWNLOAD_URL=https://minecraft.azureedge.net/bin-linux/bedrock-server-${VERSION}.zip",
-            "fi",
-            "cd /tmp",
-            "curl -o server.zip $DOWNLOAD_URL",
-            "unzip server.zip -d /server",
-            "chown -R container:container /server"
-        ]
-    },
-    "variables": [
-        {
-            "prompt": "Which Minecraft Bedrock version to use during install?",
-            "variable": "BEDROCK_VERSION",
-            "install_only": true,
-            "default": "latest",
-            "hidden": false
-        },
-        {
-            "prompt": "",
-            "variable": "LD_LIBRARY_PATH",
-            "install_only": false,
-            "default": ".",
-            "hidden": true
-        }
+  "meta": {
+    "api_version": 2
+  },
+  "uid": "minecraft-bedrock",
+  "name": "Minecraft Bedrock",
+  "author": "vilhelm@prytznet.se",
+  "docker_image": "wilfreddev/ubuntu:latest",
+  "command": "./bedrock_server",
+  "user": "container",
+  "stop_command": "stop",
+  "default_image": true,
+  "config": {
+    "files": [
+      {
+        "filename": "server.properties",
+        "parser": "properties",
+        "environment": [
+          {
+            "config_variable": "server-port",
+            "environment_variable": "SERVER_PORT",
+            "value_format": null
+          }
+        ],
+        "action": {}
+      }
     ]
+  },
+  "installation": {
+    "docker_image": "wilfreddev/alpine:latest",
+    "shell": "/bin/ash",
+    "script": [
+      "apk --no-cache --update add curl jq",
+      "if [ \"$BEDROCK_VERSION\" == \"latest\" ]; then",
+      "   RAW=`curl https://www.minecraft.net/en-us/download/server/bedrock`",
+      "   DOWNLOAD_URL=`echo \"$RAW\" | grep -Eo \"(http|https)://[a-zA-Z0-9./?=_%:-]*\" | grep -E 'https://minecraft.azureedge.net/bin-linux'`",
+      "else",
+      "   DOWNLOAD_URL=https://minecraft.azureedge.net/bin-linux/bedrock-server-${VERSION}.zip",
+      "fi",
+      "cd /tmp",
+      "curl -o server.zip $DOWNLOAD_URL",
+      "unzip server.zip -d /server",
+      "chown -R container:container /server"
+    ]
+  },
+  "variables": [
+    {
+      "prompt": "Which Minecraft Bedrock version to use during install?",
+      "variable": "BEDROCK_VERSION",
+      "install_only": true,
+      "default": "latest",
+      "hidden": false
+    },
+    {
+      "prompt": "",
+      "variable": "LD_LIBRARY_PATH",
+      "install_only": false,
+      "default": ".",
+      "hidden": true
+    }
+  ]
 }
