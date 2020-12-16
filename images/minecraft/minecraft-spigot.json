@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "api_version": 2
+  },
+  "uid": "minecraft-spigot",
+  "name": "Minecraft Spigot",
+  "author": "vilhelm@prytznet.se",
+  "docker_image": "wilfreddev/java:latest",
+  "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar server.jar",
+  "user": "container",
+  "stop_command": "stop",
+  "default_image": true,
+  "config": {
+    "files": [
+      {
+        "filename": "server.properties",
+        "parser": "properties",
+        "environment": [
+          {
+            "config_variable": "server-port",
+            "environment_variable": "SERVER_PORT",
+            "value_format": null
+          }
+        ],
+        "action": {
+          "difficulty": "difficulty {}",
+          "white-list": "whitelist {}"
+        }
+      }
+    ]
+  },
+  "installation": {
+    "docker_image": "wilfreddev/alpine:latest",
+    "shell": "/bin/ash",
+    "script": [
+      "apk --no-cache --update add curl jq",
+      "curl -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar",
+      "java -jar BuildTools.jar --rev $MINECRAFT_VERSION",
+      "if [ \"$EULA_ACCEPTANCE\" == \"true\" ]; then",
+      "   echo \"eula=true\" > eula.txt",
+      "fi",
+      "curl -o server.properties https://raw.githubusercontent.com/wilfred-dev/images/master/configs/minecraft/standard/server.properties",
+      "sed -i \"s/{{SERVER_PORT}}/$SERVER_PORT/g\" server.properties",
+      "chown -R container:container /server"
+    ]
+  },
+  "variables": [
+    {
+      "prompt": "Which Minecraft version to use during install (has to be supported by SPigot)?",
+      "variable": "MINECRAFT_VERSION",
+      "install_only": true,
+      "default": "latest",
+      "hidden": false
+    },
+    {
+      "prompt": "Do you agree to the Minecraft EULA (https://account.mojang.com/documents/minecraft_eula)?",
+      "variable": "EULA_ACCEPTANCE",
+      "install_only": true,
+      "default": "true",
+      "hidden": false
+    }
+  ]
+}
