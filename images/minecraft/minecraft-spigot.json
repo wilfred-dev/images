@@ -30,10 +30,10 @@
     ]
   },
   "installation": {
-    "docker_image": "wilfreddev/alpine:latest",
+    "docker_image": "wilfreddev/java:latest",
     "shell": "/bin/ash",
     "script": [
-      "apk --no-cache --update add curl jq",
+      "apk --no-cache --update add curl jq git",
       "curl -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar",
       "java -jar BuildTools.jar --rev $MINECRAFT_VERSION",
       "if [ \"$EULA_ACCEPTANCE\" == \"true\" ]; then",
@@ -46,7 +46,7 @@
   },
   "variables": [
     {
-      "prompt": "Which Minecraft version to use during install (has to be supported by SPigot)?",
+      "prompt": "Which Minecraft version to use during install (has to be supported by Spigot)?",
       "variable": "MINECRAFT_VERSION",
       "install_only": true,
       "default": "latest",
