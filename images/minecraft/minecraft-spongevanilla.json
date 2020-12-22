@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "api_version": 2
+  },
+  "uid": "minecraft-spongevanilla",
+  "name": "Minecraft SpongeVanilla",
+  "author": "vilhelm@prytznet.se",
+  "docker_image": "wilfreddev/java:latest",
+  "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
+  "user": "container",
+  "stop_command": "stop",
+  "default_image": true,
+  "config": {
+    "files": [
+      {
+        "filename": "server.properties",
+        "parser": "properties",
+        "environment": [
+          {
+            "config_variable": "server-port",
+            "environment_variable": "SERVER_PORT",
+            "value_format": null
+          }
+        ],
+        "action": {
+          "difficulty": "difficulty {}",
+          "white-list": "whitelist {}"
+        }
+      }
+    ]
+  },
+  "installation": {
+    "docker_image": "wilfreddev/alpine:latest",
+    "shell": "/bin/ash",
+    "script": [
+      "apk --no-cache --update add curl jq",
+      "if [ \"$SPONGE_VERSION\" == \"latest\" ]; then",
+      "   VERSION=$(curl -s https://dl-api.spongepowered.org/v1/org.spongepowered/spongevanilla | jq -r '.buildTypes.stable.recommended.version')",
+      "else",
+      "   VERSION=\"$SPONGE_VERSION\"",
+      "fi",
+      "DOWNLOAD_URL=https://repo.spongepowered.org/maven/org/spongepowered/spongevanilla/${VERSION}/spongevanilla-${VERSION}.jar",
+      "curl -o server.jar $DOWNLOAD_URL",
+      "if [ \"$EULA_ACCEPTANCE\" == \"true\" ]; then",
+      "   echo \"eula=true\" > eula.txt",
+      "fi",
+      "curl -o server.properties https://raw.githubusercontent.com/wilfred-dev/images/master/configs/minecraft/standard/server.properties",
+      "sed -i \"s/{{SERVER_PORT}}/$SERVER_PORT/g\" server.properties",
+      "chown -R container:container /server"
+    ]
+  },
+  "variables": [
+    {
+      "prompt": "Which SpongeVanilla version to use during install (has to be supported by Sponge)?",
+      "variable": "SPONGE_VERSIOn",
+      "install_only": true,
+      "default": "latest",
+      "hidden": false
+    },
+    {
+      "prompt": "Do you agree to the Minecraft EULA (https://account.mojang.com/documents/minecraft_eula)?",
+      "variable": "EULA_ACCEPTANCE",
+      "install_only": true,
+      "default": "true",
+      "hidden": false
+    }
+  ]
+}
