@@ -52,7 +52,7 @@
   "variables": [
     {
       "prompt": "Which SpongeVanilla version to use during install (has to be supported by Sponge)?",
-      "variable": "SPONGE_VERSIOn",
+      "variable": "SPONGE_VERSION",
       "install_only": true,
       "default": "latest",
       "hidden": false
