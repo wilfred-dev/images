@@ -1,4 +1,4 @@
-FROM openjdk:11-alpine
+FROM openjdk:8-alpine
 
 LABEL maintainer="vilhelm@prytznet.se"
 
