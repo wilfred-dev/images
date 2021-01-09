@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-LABEL maintainer="vilhelm@prytznet.se"
+LABEL author="Vilhelm Prytz" maintainer="vilhelm@prytznet.se"
 
 ENV HOME /server
 
