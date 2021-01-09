@@ -2,11 +2,12 @@ services:
   - docker
 
 script:
-- docker build -t wilfreddev/source-engine:latest docker-images/source-engine
-- docker build -t wilfreddev/java:latest docker-images/java
-- docker build -t wilfreddev/ubuntu:latest docker-images/ubuntu
-- docker build -t wilfreddev/debian:latest docker-images/debian
-- docker build -t wilfreddev/alpine:latest docker-images/alpine
+  - docker build -t wilfreddev/source-engine:latest docker-images/source-engine
+  - docker build -t wilfreddev/java:latest docker-images/java
+  - docker build -t wilfreddev/java:11 docker-images/java-11
+  - docker build -t wilfreddev/ubuntu:latest docker-images/ubuntu
+  - docker build -t wilfreddev/debian:latest docker-images/debian
+  - docker build -t wilfreddev/alpine:latest docker-images/alpine
 deploy:
   skip_cleanup: true
   provider: script
@@ -15,4 +16,4 @@ deploy:
     branch: master
 
 after_deploy:
-- rm -rf /home/travis/.docker/config.json
+  - rm -rf /home/travis/.docker/config.json
