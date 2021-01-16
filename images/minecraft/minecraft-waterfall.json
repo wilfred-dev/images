@@ -11,25 +11,7 @@
   "stop_command": "end",
   "default_image": true,
   "config": {
-    "files": [
-      {
-        "filename": "config.yml",
-        "parser": "yaml",
-        "environment": [
-          {
-            "config_variable": "listeners/0/host",
-            "environment_variable": "SERVER_PORT",
-            "value_format": "0.0.0.0:{}"
-          },
-          {
-            "config_variable": "listeners/0/query_port",
-            "environment_variable": "SERVER_PORT",
-            "value_format": null
-          }
-        ],
-        "action": {}
-      }
-    ]
+    "files": []
   },
   "installation": {
     "docker_image": "wilfreddev/alpine:latest",
