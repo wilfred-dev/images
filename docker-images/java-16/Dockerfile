@@ -1,4 +1,4 @@
-FROM openjdk:11-slim
+FROM openjdk:16-slim
 
 LABEL author="Vilhelm Prytz" maintainer="vilhelm@prytznet.se"
 
