@@ -1,6 +1,6 @@
 # wilfred/images
 
-[![Build Status](https://travis-ci.com/wilfred-dev/images.svg?branch=master)](https://travis-ci.com/wilfred-dev/images)
+![Docker workflow](https://github.com/wilfred-dev/images/actions/workflows/docker-image.yml/badge.svg)
 
 🐳 Default Wilfred images
 
