@@ -20,6 +20,24 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      # Alpine
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: docker-images/alpine
+          push: true
+          tags: wilfreddev/alpine:latest
+
+      # Debian
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: docker-images/debian
+          push: true
+          tags: wilfreddev/debian:latest
+
       # Java 8
       - name: Build and push
         id: docker_build
@@ -28,6 +46,33 @@ jobs:
           context: docker-images/java-8
           push: true
           tags: wilfreddev/java:8
+
+      # Java 11
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: docker-images/java-11
+          push: true
+          tags: wilfreddev/java:11
+
+      # Source Engine
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: docker-images/source-engine
+          push: true
+          tags: wilfreddev/source-engine:latest
+
+      # Ubuntu
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: docker-images/ubuntu
+          push: true
+          tags: wilfreddev/ubuntu:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
