@@ -2,10 +2,10 @@
   "meta": {
     "api_version": 2
   },
-  "uid": "minecraft-vanilla",
-  "name": "Vanilla Minecraft",
+  "uid": "minecraft-vanilla-java-8",
+  "name": "Vanilla Minecraft (Java 8 for legacy)",
   "author": "vilhelm@prytznet.se",
-  "docker_image": "wilfreddev/java:16",
+  "docker_image": "wilfreddev/java:8",
   "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
   "user": "container",
   "stop_command": "stop",
