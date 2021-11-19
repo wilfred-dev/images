@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-LABEL author="Vilhelm Prytz" maintainer="vilhelm@prytznet.se"
+LABEL author="Vilhelm Prytz" maintainer="info@wilfredproject.org"
 
 ENV HOME /server
 ENV DEBIAN_FRONTEND noninteractive

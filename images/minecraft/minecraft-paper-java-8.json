@@ -4,7 +4,7 @@
   },
   "uid": "minecraft-paper-java-8",
   "name": "Paper Minecraft (Java 8 for legacy)",
-  "author": "vilhelm@prytznet.se",
+  "author": "info@wilfredproject.org",
   "docker_image": "wilfreddev/java:8",
   "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar server.jar",
   "user": "container",

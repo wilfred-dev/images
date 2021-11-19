@@ -1,6 +1,6 @@
 FROM debian:stretch
 
-LABEL author="Vilhelm Prytz" maintainer="vilhelm@prytznet.se"
+LABEL author="Vilhelm Prytz" maintainer="info@wilfredproject.org"
 
 ENV HOME /server
 

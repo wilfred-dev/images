@@ -1,6 +1,6 @@
 FROM openjdk:8-alpine
 
-LABEL author="Vilhelm Prytz" maintainer="vilhelm@prytznet.se"
+LABEL author="Vilhelm Prytz" maintainer="info@wilfredproject.org"
 
 ENV HOME /server
 

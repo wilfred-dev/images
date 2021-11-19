@@ -4,7 +4,7 @@
   },
   "uid": "multi-theft-auto",
   "name": "Multi Theft Auto",
-  "author": "vilhelm@prytznet.se",
+  "author": "info@wilfredproject.org",
   "docker_image": "wilfreddev/debian:latest",
   "command": "./mta-server64",
   "user": "container",

@@ -4,7 +4,7 @@
   },
   "uid": "minecraft-bedrock",
   "name": "Minecraft Bedrock",
-  "author": "vilhelm@prytznet.se",
+  "author": "info@wilfredproject.org",
   "docker_image": "wilfreddev/ubuntu:latest",
   "command": "./bedrock_server",
   "user": "container",
