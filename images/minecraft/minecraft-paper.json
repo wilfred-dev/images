@@ -5,7 +5,7 @@
   "uid": "minecraft-paper",
   "name": "Paper Minecraft",
   "author": "info@wilfredproject.org",
-  "docker_image": "wilfreddev/java:16",
+  "docker_image": "wilfreddev/java:17",
   "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar server.jar",
   "user": "container",
   "stop_command": "stop",
