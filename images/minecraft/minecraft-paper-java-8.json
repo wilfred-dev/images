@@ -40,7 +40,7 @@
       "   VERSION=\"$MINECRAFT_VERSION\"",
       "fi",
       "LATEST_BUILD=`curl -s https://papermc.io/api/v2/projects/paper/versions/${VERSION} | jq -r '.builds' | jq -r '.[-1]'`",
-      "JAR_NAME=$paper-${VERSION}-${LATEST_BUILD}.jar",
+      "JAR_NAME=paper-${VERSION}-${LATEST_BUILD}.jar",
       "DOWNLOAD_URL=https://papermc.io/api/v2/projects/paper/versions/${VERSION}/builds/${LATEST_BUILD}/downloads/${JAR_NAME}",
       "curl -o server.jar $DOWNLOAD_URL",
       "if [ \"$EULA_ACCEPTANCE\" == \"true\" ]; then",
