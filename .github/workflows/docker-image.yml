@@ -52,6 +52,14 @@ jobs:
           push: true
           tags: wilfreddev/java:16
 
+      # Java 17
+      - name: Build and push wilfreddev/java:17
+        uses: docker/build-push-action@v2
+        with:
+          context: docker-images/java-17
+          push: true
+          tags: wilfreddev/java:17
+
       # Source Engine
       - name: Build and push wilfreddev/source-engine:latest
         uses: docker/build-push-action@v2
