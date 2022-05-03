@@ -14,7 +14,7 @@
     "files": []
   },
   "installation": {
-    "docker_image": "wilfreddev/debian:latest",
+    "docker_image": "wilfreddev/debian:stretch",
     "shell": "/bin/bash",
     "script": [
       "apt update",

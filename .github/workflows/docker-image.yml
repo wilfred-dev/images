@@ -28,13 +28,21 @@ jobs:
           push: true
           tags: wilfreddev/alpine:latest
 
-      # Debian
-      - name: Build and push wilfreddev/debian:latest
+      # Debian stretch
+      - name: Build and push wilfreddev/debian:stretch
         uses: docker/build-push-action@v2
         with:
-          context: docker-images/debian
+          context: docker-images/debian-stretch
           push: true
-          tags: wilfreddev/debian:latest
+          tags: wilfreddev/debian:stretch
+
+      # Debian bullseye
+      - name: Build and push wilfreddev/debian:bullseye
+        uses: docker/build-push-action@v2
+        with:
+          context: docker-images/debian-bullseye
+          push: true
+          tags: wilfreddev/debian:bullseye
 
       # Java 8
       - name: Build and push wilfreddev/java:8
