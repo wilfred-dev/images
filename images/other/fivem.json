@@ -1,0 +1,89 @@
+{
+    "meta": {
+      "api_version": 2
+    },
+    "uid": "fivem",
+    "name": "FiveM",
+    "author": "info@wilfredproject.org",
+    "docker_image": "marcelbaumgartner/wilfreddebian",
+    "command": "$(pwd)/alpine/opt/cfx-server/ld-musl-x86_64.so.1 --library-path \"$(pwd)/alpine/usr/lib/v8/:$(pwd)/alpine/lib/:$(pwd)/alpine/usr/lib/\" -- $(pwd)/alpine/opt/cfx-server/FXServer +set citizen_dir $(pwd)/alpine/opt/cfx-server/citizen/ +set sv_licenseKey {{FIVEM_LICENSE}} +set steam_webApiKey {{STEAM_WEBAPIKEY}} +set sv_maxplayers {{MAX_PLAYERS}} +set serverProfile default +set txAdminPort {{TXADMIN_PORT}} $( [ \"$TXADMIN_ENABLE\" == \"1\" ] || printf %s '+exec server.cfg' )",
+    "user": "container",
+    "stop_command": "quit",
+    "default_image": true,
+    "config": {
+      "files": []
+    },
+    "installation": {
+      "docker_image": "marcelbaumgartner/wilfreddebian",
+      "shell": "/bin/bash",
+      "script": [
+        "apt update -y",
+        "apt install -y tar xz-utils curl git file jq",
+        "mkdir -p /server/resources",
+        "echo \"updating citizenfx resource files\"",
+        "git clone https://github.com/citizenfx/cfx-server-data.git /tmp",
+        "cp -Rf /tmp/resources/* resources/",
+        "RELEASE_PAGE=$(curl -sSL https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/)",
+        "CHANGELOGS_PAGE=$(curl -sSL https://changelogs-live.fivem.net/api/changelog/versions/linux/server)",
+        "if [[ \"${FIVEM_VERSION}\" == \"latest\" ]] || [[ -z ${FIVEM_VERSION} ]]; then",
+        "   DOWNLOAD_LINK=$(echo $CHANGELOGS_PAGE | jq -r '.latest_download')",
+        "else",
+        "   VERSION_LINK=$(echo -e \"${RELEASE_PAGE}\" | grep -Eo '\".*\/*.tar.xz\"' | grep -Eo '\".*\"' | sed 's\/\\\"\/\/g' | sed 's\/\\.\\\/\/\/1' | grep ${CFX_VERSION})",
+        "   if [[ \"${VERSION_LINK}\" == \"\" ]]; then",
+        "      echo -e \"defaulting to latest as the version requested was invalid.\"",
+        "      DOWNLOAD_LINK=$(echo $CHANGELOGS_PAGE | jq -r '.latest_download')",
+        "   else",
+        "      DOWNLOAD_LINK=$(echo https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/${VERSION_LINK})",
+        "   fi",
+        "fi",
+        "echo -e \"Running curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*/}\"",
+        "curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*/}",
+        "echo \"Extracting fivem files\"",
+        "FILETYPE=$(file -F ',' ${DOWNLOAD_LINK##*/} | cut -d',' -f2 | cut -d' ' -f2)",
+        "if [ \"$FILETYPE\" == \"gzip\" ]; then",
+        "  tar xzvf ${DOWNLOAD_LINK##*/}",
+        "elif [ \"$FILETYPE\" == \"Zip\" ]; then",
+        "  unzip ${DOWNLOAD_LINK##*/}",
+        "elif [ \"$FILETYPE\" == \"XZ\" ]; then",
+        "  tar xvf ${DOWNLOAD_LINK##*/}",
+        "else",
+        "   echo -e \"unknown filetype. Exiting\"",
+        "   exit 2",
+        "fi",
+        "rm -rf ${DOWNLOAD_LINK##*/} run.sh",
+        "if [ -e server.cfg ]; then",
+        "  echo \"Skipping downloading default server config file as one already exists\"",
+        "else",
+        "  echo \"Downloading default fivem config\"",
+        "  curl https://raw.githubusercontent.com/parkervcp/eggs/master/game_eggs/gta/fivem/server.cfg >>server.cfg",
+        "fi",
+        "mkdir -p logs/",
+        "echo \"install complete\"",
+        "chown -R container:container /server"
+      ]
+    },
+    "variables": [
+      {
+        "prompt": "Which version to use during install?",
+        "variable": "VERSION",
+        "install_only": true,
+        "default": "latest",
+        "hidden": false
+      },
+      {
+        "prompt": "Which name should be shown in the server list?",
+        "variable": "SERVER_NAME",
+        "install_only": false,
+        "default": "A wilfred hosted server",
+        "hidden": false
+      },
+      {
+        "prompt": "Which map should the server host?",
+        "variable": "MAPNAME",
+        "install_only": false,
+        "default": "Tendrils",
+        "hidden": false
+      }
+    ]
+  }
+  
