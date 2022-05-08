@@ -1,0 +1,65 @@
+{
+  "meta": {
+    "api_version": 2
+  },
+  "uid": "mindustry",
+  "name": "Mindustry",
+  "author": "info@wilfredproject.org",
+  "docker_image": "wilfreddev/java:17",
+  "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server-release.jar config port {{SERVER_PORT}},config name {{image.env.SERVER_NAME}},host {{image.env.MAPNAME}}",
+  "user": "container",
+  "stop_command": "exit",
+  "default_image": true,
+  "config": {
+    "files": []
+  },
+  "installation": {
+    "docker_image": "wilfreddev/alpine:latest",
+    "shell": "/bin/ash",
+    "script": [
+      "apk --no-cache --update add curl jq",
+      "GITHUB_PACKAGE=Anuken/Mindustry",
+      "MATCH=server-release.jar",
+      "cd /server",
+      "LATEST_JSON=$(curl --silent \"https://api.github.com/repos/${GITHUB_PACKAGE}/releases/latest\")",
+      "RELEASES=$(curl --silent \"https://api.github.com/repos/${GITHUB_PACKAGE}/releases\")",
+      "if [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then",
+      "   DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq -r '.assets | .[].browser_download_url' | grep -i ${MATCH})",
+      "else",
+      "   VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')",
+      "   if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then",
+      "      DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})",
+      "   else",
+      "      echo -e \"defaulting to latest release\"",
+      "      DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)",
+      "   fi",
+      "fi",
+      "echo -e \"running: curl -L -O ${DOWNLOAD_LINK}\"",
+      "curl -L -O ${DOWNLOAD_LINK}",
+      "chown -R container:container /server"
+    ]
+  },
+  "variables": [
+    {
+      "prompt": "Which version to use during install?",
+      "variable": "VERSION",
+      "install_only": true,
+      "default": "latest",
+      "hidden": false
+    },
+    {
+      "prompt": "Which name should be shown in the server list?",
+      "variable": "SERVER_NAME",
+      "install_only": false,
+      "default": "Created using Wilfred, www.wilfredproject.org",
+      "hidden": false
+    },
+    {
+      "prompt": "Which map should the server host?",
+      "variable": "MAPNAME",
+      "install_only": false,
+      "default": "Tendrils",
+      "hidden": false
+    }
+  ]
+}

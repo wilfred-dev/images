@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "api_version": 2
+  },
+  "uid": "teamspeak",
+  "name": "TeamSpeak 3 Server",
+  "author": "info@wilfredproject.org",
+  "docker_image": "wilfreddev/debian:bullseye",
+  "command": "./ts3server default_voice_port={{SERVER_PORT}} query_port={{image.env.QUERY_PORT}} filetransfer_ip=0.0.0.0 filetransfer_port={{image.env.FILE_TRANSFER}} license_accepted=1",
+  "user": "container",
+  "stop_command": "",
+  "default_image": true,
+  "config": {
+    "files": []
+  },
+  "installation": {
+    "docker_image": "wilfreddev/alpine:latest",
+    "shell": "/bin/ash",
+    "script": [
+      "apk --no-cache --update add curl jq tar",
+      "if [ -z ${TS_VERSION} ] || [ ${TS_VERSION} == latest ]; then",
+      "    TS_VERSION=$(curl -sSL https://teamspeak.com/versions/server.json | jq -r '.linux.x86_64.version')",
+      "fi",
+      "cd /server",
+      "curl -L http://files.teamspeak-services.com/releases/server/${TS_VERSION}/teamspeak3-server_linux_amd64-${TS_VERSION}.tar.bz2 | tar -xvj --strip-components=1",
+      "chown -R container:container /server"
+    ]
+  },
+  "variables": [
+    {
+      "prompt": "Which TeamSpeak 3 version to use during installation?",
+      "variable": "TS_VERSION",
+      "install_only": true,
+      "default": "latest",
+      "hidden": false
+    },
+    {
+      "prompt": "Which port should be used for file transfers?",
+      "variable": "FILE_TRANSFER",
+      "install_only": false,
+      "default": "30033",
+      "hidden": false
+    },
+    {
+      "prompt": "Which port should be used for query?",
+      "variable": "QUERY_PORT",
+      "install_only": false,
+      "default": "10011",
+      "hidden": false
+    }
+  ]
+}

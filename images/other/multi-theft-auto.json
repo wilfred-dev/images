@@ -5,7 +5,7 @@
   "uid": "multi-theft-auto",
   "name": "Multi Theft Auto",
   "author": "info@wilfredproject.org",
-  "docker_image": "wilfreddev/debian:latest",
+  "docker_image": "wilfreddev/debian:stretch",
   "command": "./mta-server64",
   "user": "container",
   "stop_command": "",
@@ -14,7 +14,7 @@
     "files": []
   },
   "installation": {
-    "docker_image": "wilfreddev/debian:latest",
+    "docker_image": "wilfreddev/debian:stretch",
     "shell": "/bin/bash",
     "script": [
       "apt update -y",
