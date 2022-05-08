@@ -6,6 +6,7 @@
   "name": "Paper Minecraft (Java 8 for legacy)",
   "author": "info@wilfredproject.org",
   "docker_image": "wilfreddev/java:8",
+  "default_port": "25565",
   "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar server.jar",
   "user": "container",
   "stop_command": "stop",

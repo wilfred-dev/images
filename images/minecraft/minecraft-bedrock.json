@@ -6,6 +6,7 @@
   "name": "Minecraft Bedrock",
   "author": "info@wilfredproject.org",
   "docker_image": "wilfreddev/ubuntu:latest",
+  "default_port": "25565",
   "command": "./bedrock_server",
   "user": "container",
   "stop_command": "stop",

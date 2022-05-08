@@ -7,6 +7,7 @@
   "author": "info@wilfredproject.org",
   "docker_image": "wilfreddev/debian:bullseye",
   "command": "./ts3server default_voice_port={{SERVER_PORT}} query_port={{image.env.QUERY_PORT}} filetransfer_ip=0.0.0.0 filetransfer_port={{image.env.FILE_TRANSFER}} license_accepted=1",
+  "default_port": "9987",
   "user": "container",
   "stop_command": "",
   "default_image": true,
