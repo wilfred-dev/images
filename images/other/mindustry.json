@@ -51,7 +51,7 @@
       "prompt": "Which name should be shown in the server list?",
       "variable": "SERVER_NAME",
       "install_only": false,
-      "default": "A wilfred hosted server",
+      "default": "Created using Wilfred, www.wilfredproject.org",
       "hidden": false
     },
     {
