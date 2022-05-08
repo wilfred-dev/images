@@ -14,11 +14,10 @@
     "files": []
   },
   "installation": {
-    "docker_image": "wilfreddev/debian:stretch",
-    "shell": "/bin/bash",
+    "docker_image": "wilfreddev/alpine:latest",
+    "shell": "/bin/ash",
     "script": [
-      "apt update",
-      "apt install -y curl jq wget",
+      "apk --no-cache --update add curl jq",
       "GITHUB_PACKAGE=Anuken/Mindustry",
       "MATCH=server-release.jar",
       "cd /server",
@@ -35,8 +34,8 @@
       "      DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)",
       "   fi",
       "fi",
-      "echo -e \"running: wget ${DOWNLOAD_LINK}\"",
-      "wget ${DOWNLOAD_LINK}",
+      "echo -e \"running: curl -L -O ${DOWNLOAD_LINK}\"",
+      "curl -L -O ${DOWNLOAD_LINK}",
       "chown -R container:container /server"
     ]
   },
