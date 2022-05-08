@@ -8,7 +8,7 @@
   "docker_image": "wilfreddev/debian:bullseye",
   "command": "./ts3server default_voice_port={{SERVER_PORT}} query_port={{image.env.QUERY_PORT}} filetransfer_ip=0.0.0.0 filetransfer_port={{image.env.FILE_TRANSFER}} license_accepted=1",
   "user": "container",
-  "stop_command": "^C",
+  "stop_command": "",
   "default_image": true,
   "config": {
     "files": []
