@@ -27,6 +27,7 @@ jobs:
           context: docker-images/alpine
           push: true
           tags: wilfreddev/alpine:latest
+          platforms: linux/amd64,linux/arm64/v8
 
       # Debian stretch
       - name: Build and push wilfreddev/debian:stretch
@@ -35,6 +36,7 @@ jobs:
           context: docker-images/debian-stretch
           push: true
           tags: wilfreddev/debian:stretch
+          platforms: linux/amd64,linux/arm64/v8
 
       # Debian bullseye
       - name: Build and push wilfreddev/debian:bullseye
@@ -43,6 +45,7 @@ jobs:
           context: docker-images/debian-bullseye
           push: true
           tags: wilfreddev/debian:bullseye
+          platforms: linux/amd64,linux/arm64/v8
 
       # Java 8
       - name: Build and push wilfreddev/java:8
@@ -51,6 +54,7 @@ jobs:
           context: docker-images/java-8
           push: true
           tags: wilfreddev/java:8
+          platforms: linux/amd64,linux/arm64/v8
 
       # Java 16
       - name: Build and push wilfreddev/java:16
@@ -59,6 +63,7 @@ jobs:
           context: docker-images/java-16
           push: true
           tags: wilfreddev/java:16
+          platforms: linux/amd64,linux/arm64/v8
 
       # Java 17
       - name: Build and push wilfreddev/java:17
@@ -67,6 +72,7 @@ jobs:
           context: docker-images/java-17
           push: true
           tags: wilfreddev/java:17
+          platforms: linux/amd64,linux/arm64/v8
 
       # Source Engine
       - name: Build and push wilfreddev/source-engine:latest
@@ -75,6 +81,7 @@ jobs:
           context: docker-images/source-engine
           push: true
           tags: wilfreddev/source-engine:latest
+          platforms: linux/amd64,linux/arm64/v8
 
       # Ubuntu
       - name: Build and push wilfreddev/ubuntu:latest
@@ -83,3 +90,4 @@ jobs:
           context: docker-images/ubuntu
           push: true
           tags: wilfreddev/ubuntu:latest
+          platforms: linux/amd64,linux/arm64/v8
