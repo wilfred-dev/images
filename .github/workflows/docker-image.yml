@@ -79,7 +79,6 @@ jobs:
           context: docker-images/source-engine
           push: true
           tags: wilfreddev/source-engine:latest
-          platforms: linux/amd64,linux/arm64/v8
 
       # Ubuntu
       - name: Build and push wilfreddev/ubuntu:latest
