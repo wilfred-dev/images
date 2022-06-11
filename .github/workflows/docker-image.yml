@@ -44,7 +44,6 @@ jobs:
           context: docker-images/debian-bullseye
           push: true
           tags: wilfreddev/debian:bullseye
-          platforms: linux/amd64,linux/arm64/v8
 
       # Java 8
       - name: Build and push wilfreddev/java:8
