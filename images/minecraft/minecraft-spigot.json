@@ -31,7 +31,7 @@
     ]
   },
   "installation": {
-    "docker_image": "wilfreddev/java:8",
+    "docker_image": "wilfreddev/java:17",
     "shell": "/bin/ash",
     "script": [
       "apk --no-cache --update add curl jq git",
