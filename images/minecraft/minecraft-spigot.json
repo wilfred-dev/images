@@ -5,7 +5,7 @@
   "uid": "minecraft-spigot",
   "name": "Minecraft Spigot",
   "author": "info@wilfredproject.org",
-  "docker_image": "wilfreddev/java:8",
+  "docker_image": "wilfreddev/java:17",
   "command": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar server.jar",
   "default_port": "25565",
   "user": "container",
