@@ -1,4 +1,4 @@
-FROM openjdk:16-slim
+FROM openjdk:16-alpine
 
 LABEL author="Vilhelm Prytz" maintainer="info@wilfredproject.org"
 

@@ -1,4 +1,4 @@
-FROM openjdk:17-slim
+FROM openjdk:17-alpine
 
 LABEL author="Vilhelm Prytz" maintainer="info@wilfredproject.org"
 
