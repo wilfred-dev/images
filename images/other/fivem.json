@@ -1,129 +1,128 @@
 {
-    "meta": {
-      "api_version": 2
-    },
-    "uid": "fivem",
-    "name": "FiveM",
-    "author": "info@wilfredproject.org",
-    "docker_image": "wilfreddev/debian:bullseye",
-    "command": "/server/alpine/opt/cfx-server/ld-musl-x86_64.so.1 --library-path \"/server/alpine/usr/lib/v8/:/server/alpine/lib/:/server/alpine/usr/lib/\" -- /server/alpine/opt/cfx-server/FXServer +set citizen_dir /server/alpine/opt/cfx-server/citizen/ +set sv_licenseKey {{image.env.FIVEM_LICENSE}} +set steam_webApiKey {{image.env.STEAM_WEBAPIKEY}} +set sv_maxplayers {{image.env.MAX_PLAYERS}} +set serverProfile default +set txAdminPort {{image.env.TXADMIN_PORT}} $( [ \"$TXADMIN_ENABLE\" == \"1\" ] || printf %s '+exec server.cfg' )",
-    "user": "container",
-    "default_port": "30110",
-    "stop_command": "quit",
-    "default_image": true,
-    "config": {
-      "files": []
-    },
-    "installation": {
-      "docker_image": "wilfreddev/alpine:latest",
-      "shell": "/bin/ash",
-      "script": [
-        "apk --no-cache --update add tar xz curl git file jq",
-        "mkdir -p /server/resources",
-        "echo \"updating citizenfx resource files\"",
-        "git clone https://github.com/citizenfx/cfx-server-data.git /tmp",
-        "cp -Rf /tmp/resources/* resources/",
-        "RELEASE_PAGE=$(curl -sSL https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/)",
-        "CHANGELOGS_PAGE=$(curl -sSL https://changelogs-live.fivem.net/api/changelog/versions/linux/server)",
-        "if [[ \"${FIVEM_VERSION}\" == \"latest\" ]] || [[ -z ${FIVEM_VERSION} ]]; then",
-        "   DOWNLOAD_LINK=$(echo $CHANGELOGS_PAGE | jq -r '.latest_download')",
-        "else",
-        "   VERSION_LINK=$(echo -e \"${RELEASE_PAGE}\" | grep -Eo '\".*\/*.tar.xz\"' | grep -Eo '\".*\"' | sed 's\/\\\"\/\/g' | sed 's\/\\.\\\/\/\/1' | grep ${CFX_VERSION})",
-        "   if [[ \"${VERSION_LINK}\" == \"\" ]]; then",
-        "      echo -e \"defaulting to latest as the version requested was invalid.\"",
-        "      DOWNLOAD_LINK=$(echo $CHANGELOGS_PAGE | jq -r '.latest_download')",
-        "   else",
-        "      DOWNLOAD_LINK=$(echo https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/${VERSION_LINK})",
-        "   fi",
-        "fi",
-        "echo -e \"Running curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*/}\"",
-        "curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*/}",
-        "echo \"Extracting fivem files\"",
-        "FILETYPE=$(file -F ',' ${DOWNLOAD_LINK##*/} | cut -d',' -f2 | cut -d' ' -f2)",
-        "if [ \"$FILETYPE\" == \"gzip\" ]; then",
-        "  tar xzvf ${DOWNLOAD_LINK##*/}",
-        "elif [ \"$FILETYPE\" == \"Zip\" ]; then",
-        "  unzip ${DOWNLOAD_LINK##*/}",
-        "elif [ \"$FILETYPE\" == \"XZ\" ]; then",
-        "  tar xvf ${DOWNLOAD_LINK##*/}",
-        "else",
-        "   echo -e \"unknown filetype. Exiting\"",
-        "   exit 2",
-        "fi",
-        "rm -rf ${DOWNLOAD_LINK##*/} run.sh",
-        "if [ -e server.cfg ]; then",
-        "  echo \"Skipping downloading default server config file as one already exists\"",
-        "else",
-        "  echo \"Downloading default fivem config\"",
-        "  curl https://raw.githubusercontent.com/Marcel-Baumgartner/images/fivem/configs/fivem/server.cfg >>server.cfg",
-        "fi",
-        "mkdir -p logs/",
-        "sed -i \"s/{{SERVER_PORT}}/$SERVER_PORT/g\" server.cfg",
-        "sed -i \"s/{{MAX_PLAYERS}}/$MAX_PLAYERS/g\" server.cfg",
-        "sed -i \"s/{{STEAM_KEY}}/$STEAM_WEBAPIKEY/g\" server.cfg",
-        "sed -i \"s/{{FIVEM_KEY}}/$FIVEM_LICENSE/g\" server.cfg",
-        "sed -i \"s/{{SERVER_HOSTNAME}}/$SERVER_HOSTNAME/g\" server.cfg",
-        "echo \"install complete\"",
-        "chown -R container:container /server"
-      ]
-    },
-    "variables": [
-      {
-        "prompt": "Enter your fivem license key ( from https://keymaster.fivem.net)",
-        "variable": "FIVEM_LICENSE",
-        "install_only": false,
-        "default": "You have to set this value",
-        "hidden": false
-      },
-      {
-        "prompt": "Enter the amount of player slots",
-        "variable": "MAX_PLAYERS",
-        "install_only": false,
-        "default": "48",
-        "hidden": false
-      },
-      {
-        "prompt": "Enter the server hostname (will be shown in th server list)",
-        "variable": "SERVER_HOSTNAME",
-        "install_only": false,
-        "default": "A wilfred hosted server",
-        "hidden": false
-      },
-      {
-        "prompt": "Enter the FiveM version you want to use",
-        "variable": "FIVEM_VERSION",
-        "install_only": true,
-        "default": "latest",
-        "hidden": false
-      },
-      {
-        "prompt": "Enter a custom download link if you want",
-        "variable": "DOWNLOAD_URL",
-        "install_only": true,
-        "default": "",
-        "hidden": false
-      },
-      {
-        "prompt": "Enter a steam web api key if you have one",
-        "variable": "STEAM_WEBAPIKEY",
-        "install_only": false,
-        "default": "none",
-        "hidden": false
-      },
-      {
-        "prompt": "Should txAdmin be enabled (0 or 1)?",
-        "variable": "TXADMIN_ENABLE",
-        "install_only": false,
-        "default": "0",
-        "hidden": false
-      },
-      {
-        "prompt": "Enter the port which txAdmin should use",
-        "variable": "TXADMIN_PORT",
-        "install_only": false,
-        "default": "40120",
-        "hidden": false
-      }
+  "meta": {
+    "api_version": 2
+  },
+  "uid": "fivem",
+  "name": "FiveM",
+  "author": "info@wilfredproject.org",
+  "docker_image": "wilfreddev/debian:bullseye",
+  "command": "/server/alpine/opt/cfx-server/ld-musl-x86_64.so.1 --library-path \"/server/alpine/usr/lib/v8/:/server/alpine/lib/:/server/alpine/usr/lib/\" -- /server/alpine/opt/cfx-server/FXServer +set citizen_dir /server/alpine/opt/cfx-server/citizen/ +set sv_licenseKey {{image.env.FIVEM_LICENSE}} +set steam_webApiKey {{image.env.STEAM_WEBAPIKEY}} +set sv_maxplayers {{image.env.MAX_PLAYERS}} +set serverProfile default +set txAdminPort {{image.env.TXADMIN_PORT}} $( [ \"$TXADMIN_ENABLE\" == \"1\" ] || printf %s '+exec server.cfg' )",
+  "user": "container",
+  "default_port": "30110",
+  "stop_command": "quit",
+  "default_image": true,
+  "config": {
+    "files": []
+  },
+  "installation": {
+    "docker_image": "wilfreddev/alpine:latest",
+    "shell": "/bin/ash",
+    "script": [
+      "apk --no-cache --update add tar xz curl git file jq",
+      "mkdir -p /server/resources",
+      "echo \"updating citizenfx resource files\"",
+      "git clone https://github.com/citizenfx/cfx-server-data.git /tmp",
+      "cp -Rf /tmp/resources/* resources/",
+      "RELEASE_PAGE=$(curl -sSL https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/)",
+      "CHANGELOGS_PAGE=$(curl -sSL https://changelogs-live.fivem.net/api/changelog/versions/linux/server)",
+      "if [[ \"${FIVEM_VERSION}\" == \"latest\" ]] || [[ -z ${FIVEM_VERSION} ]]; then",
+      "   DOWNLOAD_LINK=$(echo $CHANGELOGS_PAGE | jq -r '.latest_download')",
+      "else",
+      "   VERSION_LINK=$(echo -e \"${RELEASE_PAGE}\" | grep -Eo '\".*/*.tar.xz\"' | grep -Eo '\".*\"' | sed 's/\\\"//g' | sed 's/\\.\\///1' | grep ${CFX_VERSION})",
+      "   if [[ \"${VERSION_LINK}\" == \"\" ]]; then",
+      "      echo -e \"defaulting to latest as the version requested was invalid.\"",
+      "      DOWNLOAD_LINK=$(echo $CHANGELOGS_PAGE | jq -r '.latest_download')",
+      "   else",
+      "      DOWNLOAD_LINK=$(echo https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/${VERSION_LINK})",
+      "   fi",
+      "fi",
+      "echo -e \"Running curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*/}\"",
+      "curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*/}",
+      "echo \"Extracting fivem files\"",
+      "FILETYPE=$(file -F ',' ${DOWNLOAD_LINK##*/} | cut -d',' -f2 | cut -d' ' -f2)",
+      "if [ \"$FILETYPE\" == \"gzip\" ]; then",
+      "  tar xzvf ${DOWNLOAD_LINK##*/}",
+      "elif [ \"$FILETYPE\" == \"Zip\" ]; then",
+      "  unzip ${DOWNLOAD_LINK##*/}",
+      "elif [ \"$FILETYPE\" == \"XZ\" ]; then",
+      "  tar xvf ${DOWNLOAD_LINK##*/}",
+      "else",
+      "   echo -e \"unknown filetype. Exiting\"",
+      "   exit 2",
+      "fi",
+      "rm -rf ${DOWNLOAD_LINK##*/} run.sh",
+      "if [ -e server.cfg ]; then",
+      "  echo \"Skipping downloading default server config file as one already exists\"",
+      "else",
+      "  echo \"Downloading default fivem config\"",
+      "  curl https://raw.githubusercontent.com/Marcel-Baumgartner/images/fivem/configs/fivem/server.cfg >>server.cfg",
+      "fi",
+      "mkdir -p logs/",
+      "sed -i \"s/{{SERVER_PORT}}/$SERVER_PORT/g\" server.cfg",
+      "sed -i \"s/{{MAX_PLAYERS}}/$MAX_PLAYERS/g\" server.cfg",
+      "sed -i \"s/{{STEAM_KEY}}/$STEAM_WEBAPIKEY/g\" server.cfg",
+      "sed -i \"s/{{FIVEM_KEY}}/$FIVEM_LICENSE/g\" server.cfg",
+      "sed -i \"s/{{SERVER_HOSTNAME}}/$SERVER_HOSTNAME/g\" server.cfg",
+      "echo \"install complete\"",
+      "chown -R container:container /server"
     ]
-  }
-  
+  },
+  "variables": [
+    {
+      "prompt": "Enter your fivem license key ( from https://keymaster.fivem.net)",
+      "variable": "FIVEM_LICENSE",
+      "install_only": false,
+      "default": "You have to set this value",
+      "hidden": false
+    },
+    {
+      "prompt": "Enter the amount of player slots",
+      "variable": "MAX_PLAYERS",
+      "install_only": false,
+      "default": "48",
+      "hidden": false
+    },
+    {
+      "prompt": "Enter the server hostname (will be shown in th server list)",
+      "variable": "SERVER_HOSTNAME",
+      "install_only": false,
+      "default": "A wilfred hosted server",
+      "hidden": false
+    },
+    {
+      "prompt": "Enter the FiveM version you want to use",
+      "variable": "FIVEM_VERSION",
+      "install_only": true,
+      "default": "latest",
+      "hidden": false
+    },
+    {
+      "prompt": "Enter a custom download link if you want",
+      "variable": "DOWNLOAD_URL",
+      "install_only": true,
+      "default": "",
+      "hidden": false
+    },
+    {
+      "prompt": "Enter a steam web api key if you have one",
+      "variable": "STEAM_WEBAPIKEY",
+      "install_only": false,
+      "default": "none",
+      "hidden": false
+    },
+    {
+      "prompt": "Should txAdmin be enabled (0 or 1)?",
+      "variable": "TXADMIN_ENABLE",
+      "install_only": false,
+      "default": "0",
+      "hidden": false
+    },
+    {
+      "prompt": "Enter the port which txAdmin should use",
+      "variable": "TXADMIN_PORT",
+      "install_only": false,
+      "default": "40120",
+      "hidden": false
+    }
+  ]
+}
