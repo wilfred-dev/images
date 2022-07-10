@@ -61,7 +61,7 @@ jobs:
           context: docker-images/java-16
           push: true
           tags: wilfreddev/java:16
-          platforms: linux/amd64,linux/arm64/v8
+          #platforms: linux/amd64,linux/arm64/v8
 
       # Java 17
       - name: Build and push wilfreddev/java:17
@@ -70,7 +70,7 @@ jobs:
           context: docker-images/java-17
           push: true
           tags: wilfreddev/java:17
-          platforms: linux/amd64,linux/arm64/v8
+          #platforms: linux/amd64,linux/arm64/v8
 
       # Source Engine
       - name: Build and push wilfreddev/source-engine:latest
