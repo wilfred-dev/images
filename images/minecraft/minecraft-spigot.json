@@ -31,7 +31,7 @@
     ]
   },
   "installation": {
-    "docker_image": "wilfreddev/java:17",
+    "docker_image": "openjdk:17-alpine",
     "shell": "/bin/ash",
     "script": [
       "apk --no-cache --update add curl jq git",
@@ -46,6 +46,7 @@
       "fi",
       "curl -o server.properties https://raw.githubusercontent.com/wilfred-dev/images/master/configs/minecraft/standard/server.properties",
       "sed -i \"s/{{SERVER_PORT}}/$SERVER_PORT/g\" server.properties",
+      "adduser --disabled-password --gecos \"\" --home \"/server\" \"container\"",
       "chown -R container:container /server"
     ]
   },
