@@ -7,7 +7,7 @@ ENV HOME /server
 
 RUN apt update && apt upgrade -y
 
-RUN apt install -y git wget curl tar zip unzip binutils iproute2 net-tools telnet
+RUN apt install -y git wget curl tar zip unzip binutils iproute2 net-tools telnet locales
 
 RUN update-locale lang=en_US.UTF-8 && dpkg-reconfigure --frontend noninteractive locales
 
